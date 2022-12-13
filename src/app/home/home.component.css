@@ -1,0 +1,44 @@
+ #weather {
+     background: linear-gradient(to right, rgba(170, 182, 163, 0.5) 0%, rgba(50, 162, 179, 0.5) 100%),
+         url("/assets/Img/background-min.jpg");
+     background-size: cover;
+     height: 100vh;
+ }
+
+ .ngx-slider .ngx-slider-bubble.ngx-slider-limit {
+     color: #fff !important;
+ }
+
+ .ngx-slider .ngx-slider-bubble {
+     color: #fff !important;
+ }
+
+ hr {
+     border-top: 0px solid #fff;
+     height: 4px;
+ }
+
+ .hr-primary {
+     background-image: radial-gradient(circle, #0d6efd, #4c8bff, #77a7ff, #a0c2fc, #cadcf8);
+ }
+
+ .day {
+     color: #fff;
+     font-weight: 800;
+     background-color: #80c96d;
+ }
+
+ .day-head {
+     color: #fff;
+     font-weight: 800;
+     background-color: #4c8bff;
+ }
+ 
+ .scrolltab{
+    overflow-y: scroll;
+    height: 245px;
+ }
+
+ .c-pointer {
+     cursor: pointer;
+ }

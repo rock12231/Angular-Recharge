@@ -1,0 +1,151 @@
+<section id="weather" class="d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <div class="card border-0 text-center w-75">
+                    <div class="card-header day-head">
+                        <h5 class="card-title">⭐ Welcome To PayTrick ⭐</h5>
+                    </div>
+                    <div *ngIf="showInput" class="card-body">
+                        <i class="fa fa-4x fa-cloud-sun"></i>
+                        <!-- <h1 *ngIf="data" class="card-title">24°C</h1> -->
+                        <p class="text-muted">{{currentDate | date:'MMM d, y, h:mm:ss a'}}</p>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text" id="basic-addon1">Number</span>
+                            <input type="text" #mob class="form-control" placeholder="Mobile Number" aria-label="Username"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <select (change)="onSubmit(st.value)" #st class="form-select mb-2" aria-label="Default select example" data-size="5">
+                            <option selected>Select State</option>
+                            <option *ngFor="let obj of state" value="{{obj}}">{{obj}}</option>
+                        </select>
+                        <select class="form-select mb-2" #op aria-label="Default select example" data-size="5">
+                            <option selected>Select Oprator</option>
+                            <option *ngFor="let obj of operator" value="{{obj.oprator_name}}">{{obj.oprator_name}} ({{obj.oprator_state}})</option>
+                        </select>
+                        <hr class="hr-primary">
+                        <button type="button" (click)="onNext(op.value,mob.value)" class="btn btn-outline-primary">Next</button>
+                    </div>
+
+                    <div *ngIf="showPlan" class="card-body">
+                        <i class="fa fa-4x fa-cloud-sun"></i>
+                        <!-- <h1 *ngIf="data" class="card-title">24°C</h1> -->
+                        <p class="text-muted">Augest 21</p>
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation" (click)="planfilter('')">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                                    role="tab" aria-controls="home" aria-selected="true">All Plan</button>
+                            </li>
+                            <li class="nav-item" role="presentation" (click)="planfilter('Call')">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                                    role="tab" aria-controls="profile" aria-selected="false">Call Plan</button>
+                            </li>
+                            <li class="nav-item" role="presentation" (click)="planfilter('Data')">
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                                    role="tab" aria-controls="contact" aria-selected="false">Data Plan</button>
+                            </li>
+                            <li class="nav-item" role="presentation" (click)="planfilter('Sms')">
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#tone" type="button" role="tab"
+                                    aria-controls="tone" aria-selected="false">SMS Plan</button>
+                            </li>
+                            <li class="nav-item" role="presentation" (click)="planfilter('Other')">
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#other" type="button" role="tab"
+                                    aria-controls="other" aria-selected="false">Other Plan</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active scrolltab" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                <div *ngFor="let plan of plans" class="card m-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{plan.plan_name}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Rate : {{plan.plan_price}} | Validity : {{plan.plan_validity}}</h6>
+                                        <p class="card-text">{{plan.plan_details}} <a (click)="payNow(plan.plan_price,plan.plan_name)" class="card-link c-pointer">Proceed To Pay</a></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade scrolltab" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                                <div *ngFor="let plan of plans" class="card m-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{plan.plan_name}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Rate : {{plan.plan_price}} | Validity : {{plan.plan_validity}}</h6>
+                                        <p class="card-text">{{plan.plan_details}} <a (click)="payNow(plan.plan_price,plan.plan_name)" class="card-link c-pointer">Proceed To Pay</a></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade scrolltab" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                
+                                <div *ngFor="let plan of plans" class="card m-2">
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{plan.plan_name}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">Rate : {{plan.plan_price}} | Validity : {{plan.plan_validity}}</h6>
+                                            <p class="card-text">{{plan.plan_details}} <a (click)="payNow(plan.plan_price,plan.plan_name)" class="card-link c-pointer">Proceed To Pay</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade scrolltab" id="tone" role="tabpanel" aria-labelledby="contact-tab">
+
+                                <div *ngFor="let plan of plans" class="card m-2">
+                                    <div class="card-body">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{plan.plan_name}}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Rate : {{plan.plan_price}} | Validity : {{plan.plan_validity}}</h6>
+                                        <p class="card-text">{{plan.plan_details}} <a (click)="payNow(plan.plan_price,plan.plan_name)" class="card-link c-pointer">Proceed To Pay</a></p>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade scrolltab" id="other" role="tabpanel" aria-labelledby="contact-tab">
+
+                                <div *ngFor="let plan of plans" class="card m-2">
+                                    <div class="card-body">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{plan.plan_name}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">Rate : {{plan.plan_price}} | Validity : {{plan.plan_validity}}</h6>
+                                            <p class="card-text">{{plan.plan_details}} <a (click)="payNow(plan.plan_price,plan.plan_name)" class="card-link c-pointer">Proceed To Pay</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr class="hr-primary">
+                        <button (click)="onBack('Plan')" type="button" class="btn btn-outline-primary">Back</button>
+                    </div>
+
+                    <div *ngIf="showPay" class="card-body">
+                        <i class="fa fa-4x fa-cloud-sun"></i>
+                        <h1 class="card-title">{{user.amount}}</h1>
+                        <h5 class="card-title">{{user.user_mobile}}</h5>
+                        <p class="text-muted"> {{user.user_oprator}} | {{user.user_plan}} </p>
+                        <button *ngIf="btnPay" (click)="onPay()" type="button" class="btn btn-outline-primary">Pay Now</button>
+
+                        <div *ngIf="loadWait" class="spinner-border text-warning" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+
+                        <div *ngIf="loadDone" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong *ngIf="statusRecharge == 'Done'">Recharge Successful !!!</strong>
+                            <strong *ngIf="statusRecharge != 'Done'">Recharge Successful !!!</strong>
+                            <button (click)="Close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <hr class="hr-primary">
+                        <button *ngIf="btnPay" (click)="onBack('Pay')" type="button" class="btn btn-outline-primary">Back</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
